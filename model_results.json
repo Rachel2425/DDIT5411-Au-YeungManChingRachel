@@ -1,0 +1,17 @@
+{
+  "baseline_cnn": {
+    "test_loss": 10.087264060974121,
+    "test_accuracy": 0.1071334257721901,
+    "model_path": "/Users/shuokuro/Documents/Github/DDIT5411-Au-YeungManChingRachel/outputs/DIT5411_local/models/baseline_cnn_final.keras"
+  },
+  "deeper_cnn": {
+    "test_loss": 0.6059824228286743,
+    "test_accuracy": 0.8583327531814575,
+    "model_path": "/Users/shuokuro/Documents/Github/DDIT5411-Au-YeungManChingRachel/outputs/DIT5411_local/models/deeper_cnn_final.keras"
+  },
+  "residual_cnn": {
+    "test_loss": 29.67287826538086,
+    "test_accuracy": 0.029515285044908524,
+    "model_path": "/Users/shuokuro/Documents/Github/DDIT5411-Au-YeungManChingRachel/outputs/DIT5411_local/models/residual_cnn_final.keras"
+  }
+}

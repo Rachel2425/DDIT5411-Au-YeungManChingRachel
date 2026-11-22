@@ -1,0 +1,9 @@
+{
+  "classes": 13065,
+  "fit_images": 469684,
+  "validation_images": 52196,
+  "test_images": 162797,
+  "augmented_fit_samples_per_epoch": 2821721,
+  "minimum_augmented_fit_samples_per_class": 200,
+  "classes_with_fewer_than_40_images": 43
+}
