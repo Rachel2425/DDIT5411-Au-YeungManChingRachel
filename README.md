@@ -192,7 +192,11 @@ The best validation accuracy was **88.42%**, reached at epoch 2. Later epochs sh
 |---|---|
 | ![Baseline CNN training curve](baseline_cnn_history.png) | ![Residual CNN training curve](residual_cnn_history.png) |
 
-The Baseline and Residual models achieved high training accuracy but much lower validation and testing accuracy, indicating substantial overfitting. The Deeper CNN generalized much better and was therefore selected as the final model.
+The Baseline and Residual models reached approximately **85% and 97% training accuracy**, respectively, but their validation accuracy remained far lower, and their testing accuracy was only **10.71% and 2.95%**, respectively. These gaps are too large to explain convincingly as ordinary overfitting alone, especially because the training and validation images were drawn from the same original per-class image pools.
+
+Possible causes include a **domain gap between augmented fitting images and unaugmented validation/testing images**, **Batch Normalization moving statistics that poorly represent the evaluation distribution**, or an undetected **preprocessing or label-mapping inconsistency**. The present experiments do not isolate which factor caused the collapse. Controlled checks—such as evaluating unaugmented training images, auditing labels and preprocessing, inspecting Batch Normalization statistics, and running augmentation ablations—are required before drawing a definitive conclusion.
+
+The Deeper CNN did not exhibit the same collapse: its best validation accuracy was **88.42%** and its testing accuracy was **85.83%**. One plausible explanation is that its additional convolutional layers learned stroke features and normalization statistics that were more robust to the fitting/evaluation distribution shift. However, the results alone do not prove this explanation or exclude a shared pipeline issue. The Deeper CNN is therefore selected empirically as the best-performing model, while the extreme Baseline and Residual results should be interpreted cautiously rather than treated as a clean comparison of architectures.
 
 ### Sample Predictions
 
@@ -265,7 +269,7 @@ For consistent results, use a single handwritten character on a clean background
 
 ## 8. Conclusion
 
-The **Deeper CNN achieved the best testing accuracy of 85.83%**, significantly outperforming the Baseline and Residual models. Its repeated convolutional layers were better able to learn the detailed strokes and structures of Traditional Chinese characters without the severe generalization failure observed in the other two models.
+The **Deeper CNN achieved the best testing accuracy of 85.83%**, significantly outperforming the Baseline and Residual models on the recorded experiments. Its additional convolutional layers may have learned more robust stroke and structural features. However, the extreme Baseline and Residual train–evaluation gaps should not be attributed to overfitting alone. Augmentation-induced domain shift, poorly matched Batch Normalization moving statistics, and preprocessing or label-mapping inconsistencies remain plausible explanations that require controlled investigation.
 
 The main challenges and solutions were:
 
@@ -274,9 +278,9 @@ The main challenges and solutions were:
 - **Storage constraints:** Augmented images were generated dynamically rather than saved as millions of separate files.
 - **Long training sessions and disconnections:** Best/latest checkpoints, training logs, and resume support were added.
 - **Different hardware platforms:** The notebook detects Colab, local CPU, NVIDIA WSL2, and Apple Silicon Metal environments.
-- **Overfitting:** Validation monitoring, dropout, learning-rate reduction, early stopping, and best-weight restoration were used.
+- **Training stability and generalization:** Validation monitoring, dropout, learning-rate reduction, early stopping, and best-weight restoration were used. The unexpected Baseline and Residual results nevertheless indicate that further pipeline validation is necessary.
 
-Future improvements could include stronger regularization, wider hyperparameter searches, and more diverse model architectures. A full confusion matrix is not shown because 13,065 classes make it impractical to read; per-class precision, recall, and top-k accuracy would be more informative additional evaluations.
+Future work should first compare training with and without augmentation, evaluate models on unaugmented fitting images, verify preprocessing and label mappings, and inspect Batch Normalization behavior. These controlled experiments would help establish why the Deeper CNN remained stable while the other models collapsed. A full confusion matrix is not shown because 13,065 classes make it impractical to read; per-class precision, recall, and top-k accuracy would also be informative additional evaluations.
 
 ## 9. References
 
