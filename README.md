@@ -282,7 +282,14 @@ The main challenges and solutions were:
 
 Future work should first compare training with and without augmentation, evaluate models on unaugmented fitting images, verify preprocessing and label mappings, and inspect Batch Normalization behavior. These controlled experiments would help establish why the Deeper CNN remained stable while the other models collapsed. A full confusion matrix is not shown because 13,065 classes make it impractical to read; per-class precision, recall, and top-k accuracy would also be informative additional evaluations.
 
-## 9. References
+## 9. Contributors
+
+- [@Rachel2425](https://github.com/Rachel2425) — Project development, notebook implementation, experiment analysis, and documentation.
+- [@ShuoKuro](https://github.com/ShuoKuro) — Model training on the Mac used for the reported experiments.
+
+Two GitHub accounts appear in this project because the computer used by @Rachel2425 had only a CPU, making the long training runs too slow. Training was therefore run on a Mac that was already logged in to the @ShuoKuro GitHub account.
+
+## 10. References
 
 1. [AI-FREE-Team — Traditional Chinese Handwriting Dataset](https://github.com/AI-FREE-Team/Traditional-Chinese-Handwriting-Dataset)
 2. [chenkenanalytic — Complete Handwriting Dataset Download](https://github.com/chenkenanalytic/handwritting_data_all)
